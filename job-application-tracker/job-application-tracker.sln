@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "job-application-tracker", "job-application-tracker\job-application-tracker.csproj", "{2554E001-E178-4031-B43C-E9161998D1EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "job-application-tracker.Tests", "job-application-tracker.Tests\job-application-tracker.Tests.csproj", "{8DA11150-69FA-406A-8B8B-46875A67FE7F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2554E001-E178-4031-B43C-E9161998D1EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2554E001-E178-4031-B43C-E9161998D1EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2554E001-E178-4031-B43C-E9161998D1EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2554E001-E178-4031-B43C-E9161998D1EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DA11150-69FA-406A-8B8B-46875A67FE7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DA11150-69FA-406A-8B8B-46875A67FE7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DA11150-69FA-406A-8B8B-46875A67FE7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DA11150-69FA-406A-8B8B-46875A67FE7F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
