@@ -2,8 +2,10 @@ namespace job_application_tracker.Tests.Controllers
 {
     using job_application_tracker.Business.Creators.Interfaces;
     using job_application_tracker.Business.Getters.Interfaces;
+    using job_application_tracker.Business.Updaters.Interfaces;
     using job_application_tracker.Controllers;
     using job_application_tracker.Data.Entities;
+    using job_application_tracker.Data.Enums;
     using Microsoft.AspNetCore.Mvc;
     using Moq;
 
@@ -103,6 +105,57 @@ namespace job_application_tracker.Tests.Controllers
             var application = Assert.IsType<JobApplication>(okResult.Value);
             Assert.Equal(1, application.Id);
             Assert.Equal("Stripe", application.Company);
+        }
+
+        [Fact]
+        public void UpdateApplicationStatus_ReturnsOkWithUpdatedApplication()
+        {
+            // Arrange
+            var applicationId = 1;
+            var request = new UpdateApplicationStatus { NewStatus = ApplicationStatus.Interview };
+
+            var expectedApplication = new JobApplication
+            {
+                Id = applicationId,
+                UserId = 1,
+                Company = "Google",
+                Role = "Senior Engineer",
+                Status = ApplicationStatus.Interview
+            };
+
+            this.automocker.GetMock<IApplicationUpdater>()
+                .Setup(x => x.UpdateApplicationStatus(applicationId, request.NewStatus))
+                .Returns(expectedApplication);
+
+            var sut = this.CreateTestSubject();
+
+            // Act
+            var result = sut.UpdateApplicationStatus(applicationId, request);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result.Result);
+            var application = Assert.IsType<JobApplication>(okResult.Value);
+            Assert.Equal(ApplicationStatus.Interview, application.Status);
+        }
+
+        [Fact]
+        public void UpdateApplicationStatus_ReturnsNotFoundWhenApplicationDoesNotExist()
+        {
+            // Arrange
+            var applicationId = 99;
+            var request = new UpdateApplicationStatus { NewStatus = ApplicationStatus.Screening };
+
+            this.automocker.GetMock<IApplicationUpdater>()
+                .Setup(x => x.UpdateApplicationStatus(applicationId, request.NewStatus))
+                .Returns((JobApplication?)null);
+
+            var sut = this.CreateTestSubject();
+
+            // Act
+            var result = sut.UpdateApplicationStatus(applicationId, request);
+
+            // Assert
+            Assert.IsType<NotFoundResult>(result.Result);
         }
     }
 }

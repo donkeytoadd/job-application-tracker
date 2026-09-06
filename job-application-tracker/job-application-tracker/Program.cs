@@ -14,6 +14,7 @@ builder.Services.Scan(scan => scan
     .AddClasses(c => c.Where(t =>
         t.Name.EndsWith("Getter") ||
         t.Name.EndsWith("Creator") ||
+        t.Name.EndsWith("Updater") ||
         t.Name.EndsWith("Query")
     ))
     .AsImplementedInterfaces()
