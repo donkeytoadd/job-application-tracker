@@ -25,7 +25,8 @@ namespace job_application_tracker.Tests.Data.Queries
 
             var user = new User
             {
-                Email = "jordan@example.com", 
+                Name = "Jordan Hanson",
+                Email = "jordan@example.com",
                 PasswordHash = "hashed_password"
             };
             

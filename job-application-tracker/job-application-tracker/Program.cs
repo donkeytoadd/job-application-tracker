@@ -15,6 +15,7 @@ builder.Services.Scan(scan => scan
         t.Name.EndsWith("Getter") ||
         t.Name.EndsWith("Creator") ||
         t.Name.EndsWith("Updater") ||
+        t.Name.EndsWith("Authenticator") ||
         t.Name.EndsWith("Query")
     ))
     .AsImplementedInterfaces()

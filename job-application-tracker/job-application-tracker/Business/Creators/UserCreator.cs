@@ -20,6 +20,7 @@
         {
             var user = new User
             {
+                Name = request.Name,
                 Email = request.Email,
                 PasswordHash = this.passwordHasher.HashPassword(null!, request.Password)
             };

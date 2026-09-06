@@ -117,7 +117,7 @@ namespace job_application_tracker.Tests.Data.Queries
             var sut = this.CreateTestSubject();
 
             // Act
-            var result = sut.Execute(applicationId: 99, ApplicationStatus.Screening);
+            var result = sut.Execute(99, ApplicationStatus.Screening);
 
             // Assert
             Assert.Null(result);

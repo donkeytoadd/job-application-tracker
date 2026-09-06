@@ -14,7 +14,8 @@ namespace job_application_tracker.Tests.Business.Creators
             // Arrange
             var request = new CreateUser
             {
-                Email = "jordan@example.com", 
+                Name = "Jordan Hanson",
+                Email = "jordan@example.com",
                 Password = "Password123!"
             };
             
@@ -47,7 +48,8 @@ namespace job_application_tracker.Tests.Business.Creators
             // Arrange
             var request = new CreateUser
             {
-                Email = "jordan@example.com", 
+                Name = "Jordan Hanson",
+                Email = "jordan@example.com",
                 Password = "Password123!"
             };
 
@@ -78,14 +80,16 @@ namespace job_application_tracker.Tests.Business.Creators
             // Arrange
             var request = new CreateUser
             {
-                Email = "jordan@example.com", 
+                Name = "Jordan Hanson",
+                Email = "jordan@example.com",
                 Password = "Password123!"
             };
             
             var expectedUser = new User
             {
-                Id = 1, 
-                Email = request.Email, 
+                Id = 1,
+                Name = "Jordan Hanson",
+                Email = request.Email,
                 PasswordHash = "hashed"
             };
 

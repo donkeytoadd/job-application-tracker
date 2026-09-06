@@ -13,6 +13,7 @@ namespace job_application_tracker.Tests.Controllers
             // Arrange
             var request = new CreateUser
             {
+                Name = "Jordan Hanson",
                 Email = "jordan@example.com",
                 Password = "Password123!"
             };
@@ -20,6 +21,7 @@ namespace job_application_tracker.Tests.Controllers
             var expectedUser = new User
             {
                 Id = 1,
+                Name = "Jordan Hanson",
                 Email = request.Email,
                 PasswordHash = "hashed_password"
             };

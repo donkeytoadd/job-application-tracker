@@ -28,8 +28,4 @@
       <ProjectReference Include="..\job-application-tracker\job-application-tracker.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Data\" />
-    </ItemGroup>
-
 </Project>
