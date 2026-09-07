@@ -5,5 +5,6 @@
     public interface IApplicationGetter
     {
         List<JobApplication> GetApplicationsByUserId(int userId);
+        JobApplication? GetApplicationById(int id);
     }
 }

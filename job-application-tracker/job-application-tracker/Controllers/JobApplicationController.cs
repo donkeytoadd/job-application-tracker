@@ -27,12 +27,24 @@
             this.applicationUpdater = applicationUpdater;
         }
 
-        [HttpGet("{userId}")]
+        [HttpGet("user/{userId}")]
         public ActionResult<List<JobApplication>> GetJobApplicationsByUserId(int userId)
         {
             logger.LogInformation("Getting all applications for UserId {UserId}", userId);
             var applicationList = this.applicationGetter.GetApplicationsByUserId(userId);
             return Ok(applicationList);
+        }
+
+        [HttpGet("{id}")]
+        public ActionResult<JobApplication> GetJobApplicationById(int id)
+        {
+            logger.LogInformation("Getting JobApplication with Id {Id}", id);
+            var application = this.applicationGetter.GetApplicationById(id);
+
+            if (application == null)
+                return NotFound();
+
+            return Ok(application);
         }
 
         [HttpPost]

@@ -71,6 +71,53 @@ namespace job_application_tracker.Tests.Controllers
         }
 
         [Fact]
+        public void GetJobApplicationById_ReturnsOkWithApplication()
+        {
+            // Arrange
+            var applicationId = 1;
+            var expectedApplication = new JobApplication
+            {
+                Id = applicationId,
+                UserId = 1,
+                Company = "Google",
+                Role = "Senior Engineer"
+            };
+
+            this.automocker.GetMock<IApplicationGetter>()
+                .Setup(x => x.GetApplicationById(applicationId))
+                .Returns(expectedApplication);
+
+            var sut = this.CreateTestSubject();
+
+            // Act
+            var result = sut.GetJobApplicationById(applicationId);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result.Result);
+            var application = Assert.IsType<JobApplication>(okResult.Value);
+            Assert.Equal(applicationId, application.Id);
+        }
+
+        [Fact]
+        public void GetJobApplicationById_ReturnsNotFoundWhenApplicationDoesNotExist()
+        {
+            // Arrange
+            var applicationId = 99;
+
+            this.automocker.GetMock<IApplicationGetter>()
+                .Setup(x => x.GetApplicationById(applicationId))
+                .Returns((JobApplication?)null);
+
+            var sut = this.CreateTestSubject();
+
+            // Act
+            var result = sut.GetJobApplicationById(applicationId);
+
+            // Assert
+            Assert.IsType<NotFoundResult>(result.Result);
+        }
+
+        [Fact]
         public void CreateJobApplication_ReturnsOkWithCreatedApplication()
         {
             // Arrange

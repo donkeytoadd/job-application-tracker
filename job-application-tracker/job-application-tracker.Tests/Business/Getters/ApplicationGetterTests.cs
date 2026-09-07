@@ -14,8 +14,20 @@ namespace job_application_tracker.Tests.Business.Getters
             var userId = 1;
             var expectedApplications = new List<JobApplication>
             {
-                new() { Id = 1, UserId = userId, Company = "Google", Role = "Senior Engineer" },
-                new() { Id = 2, UserId = userId, Company = "Microsoft", Role = "Software Engineer II" }
+                new()
+                {
+                    Id = 1, 
+                    UserId = userId, 
+                    Company = "Google", 
+                    Role = "Senior Engineer"
+                },
+                new()
+                {
+                    Id = 2, 
+                    UserId = userId, 
+                    Company = "Microsoft", 
+                    Role = "Software Engineer II"
+                }
             };
 
             this.automocker.GetMock<IGetApplicationsByUserIdQuery>()
@@ -70,6 +82,52 @@ namespace job_application_tracker.Tests.Business.Getters
             // Assert
             this.automocker.GetMock<IGetApplicationsByUserIdQuery>()
                 .Verify(x => x.Execute(userId), Times.Once);
+        }
+
+        [Fact]
+        public void GetApplicationById_ReturnsApplicationFromQuery()
+        {
+            // Arrange
+            var applicationId = 1;
+            var expectedApplication = new JobApplication
+            {
+                Id = applicationId, 
+                UserId = 1, 
+                Company = "Google", 
+                Role = "Senior Engineer"
+            };
+
+            this.automocker.GetMock<IGetApplicationByIdQuery>()
+                .Setup(x => x.Execute(applicationId))
+                .Returns(expectedApplication);
+
+            var sut = this.CreateTestSubject();
+
+            // Act
+            var result = sut.GetApplicationById(applicationId);
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal("Google", result.Company);
+        }
+
+        [Fact]
+        public void GetApplicationById_ReturnsNullWhenNotFound()
+        {
+            // Arrange
+            var applicationId = 99;
+
+            this.automocker.GetMock<IGetApplicationByIdQuery>()
+                .Setup(x => x.Execute(applicationId))
+                .Returns((JobApplication?)null);
+
+            var sut = this.CreateTestSubject();
+
+            // Act
+            var result = sut.GetApplicationById(applicationId);
+
+            // Assert
+            Assert.Null(result);
         }
     }
 }
